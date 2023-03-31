@@ -29,7 +29,7 @@
           const filteredJobs = jobs.filter(function(job) {
             return department === null || job.department === department;
           });
-          rootElement.innerHTML = renderJobs(rootElement, filteredJobs);
+          rootElement.innerHTML = renderJobs(filteredJobs);
         });
       });
     }

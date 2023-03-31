@@ -109,8 +109,6 @@
             <a href="${PERSONIO_ROOT_URL+ "/job/" + position.id}" target="_blank">
               <b>${position.name}</b>
               <div class="${rootElementName}__position__info">
-                ${position.employment_type} 
-                &bull;
                 ${position.schedule} 
                 <br>
                 ${position.office}

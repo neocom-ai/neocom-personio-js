@@ -1,6 +1,10 @@
 (function() {
   /**
    * Hacky script to display jobs on our website based on the personio API.
+   * How to use:
+   *  * Embed this script
+   *  * Add a div with these attributes: `<div class="personio-jobs" data-department="Sales"></div>`
+   *  * If `data-department` is null or non existing, all departments will be shown.
    */
 
   function renderPersonioJobs() {

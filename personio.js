@@ -5,6 +5,7 @@
    *  * Embed this script
    *  * Add a div with these attributes: `<div class="personio-jobs" data-department="Sales"></div>`
    *  * If `data-department` is null or non existing, all departments will be shown.
+   *  * `data-department` can be a list of departments, separated by `,`
    */
 
   function renderPersonioJobs() {
@@ -27,7 +28,7 @@
         rootElements.forEach(function(rootElement) {
           const department = rootElement.getAttribute("data-department");
           const filteredJobs = jobs.filter(function(job) {
-            return department === null || job.department === department;
+            return department === null || department.split(",").includes(job.department);
           });
           rootElement.innerHTML = renderJobs(filteredJobs);
         });

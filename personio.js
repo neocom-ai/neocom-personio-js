@@ -16,18 +16,18 @@
       }, {});
     };
 
-    const PERSONIO_ROOT_URL = "https://neo-commerce-gmbh.jobs.personio.de";
-    const PERSONIO_SEARCH_URL = `${PERSONIO_ROOT_URL}/search.json`;
+    const RECRUITEE_URL = 'https://neocom.recruitee.com/api/offers/';
+    
     const rootElementName = "personio-jobs";
     const rootElements = document.querySelectorAll(`.${rootElementName}`);
 
     if (rootElements.length) {
-      fetch(PERSONIO_SEARCH_URL).then(function(response) {
+      fetch(RECRUITEE_URL).then(function(response) {
         return response.json()
-      }).then(function(jobs) {
+      }).then(function(resp) {
         rootElements.forEach(function(rootElement) {
           const department = rootElement.getAttribute("data-department");
-          const filteredJobs = jobs.filter(function(job) {
+          const filteredJobs = resp.offers.filter(function(job) {
             return department === null || department.split(",").includes(job.department);
           });
           rootElement.innerHTML = renderJobs(filteredJobs);
@@ -106,12 +106,12 @@
       for (let [departmentGroup, groupedJobs] of Object.entries(groupBy(jobs, "department"))) {
         const elements = groupedJobs.map(function(position) {
           return `
-            <a href="${PERSONIO_ROOT_URL+ "/job/" + position.id}" target="_blank">
-              <b>${position.name}</b>
+            <a href="${position.careers_url}" target="_blank">
+              <b>${position.title}</b>
               <div class="${rootElementName}__position__info">
-                ${position.schedule} 
+                ${position.remote ? "remote" : "onsite (50%)"} / ${position.employment_type_code} 
                 <br>
-                ${position.office}
+                ${position.location}
               </div>
             </a>
           `.trim();
